@@ -56,3 +56,14 @@ def get_single_movie(movie_id):
     }
     response = requests.get(endpoint, headers=headers)
     return response.json()
+
+
+def get_single_movie_cast(movie_id):
+    endpoint = f"https://api.themoviedb.org/3/movie/{movie_id}/credits"
+    headers = {
+        "Authorization": f"Bearer {token}"
+    }
+    response = requests.get(endpoint, headers=headers)
+    cast = response.json()['cast']
+    cast = [actor for actor in cast if actor['profile_path'] is not None]
+    return cast[:8]
