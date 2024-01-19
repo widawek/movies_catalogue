@@ -7,6 +7,14 @@
        <h1 class="mt-5">Witaj w mojej bibliotece filmów</h1>
        <p class="lead">Znajdziesz tutaj tylko najlepsze tytuły!</p>
    </div>
+
+    <div class="col-lg-12 mb-4">
+        <a href="{{ url_for('homepage', category="now_playing") }}" class="btn btn-outline-info {% if category == 'now_playing' %}active{% endif %}">Now Playing</a>
+        <a href="{{ url_for('homepage', category="popular") }}" class="btn btn-outline-info {% if category == 'popular' %}active{% endif %}">Popular</a>
+        <a href="{{ url_for('homepage', category="top_rated") }}" class="btn btn-outline-info {% if category == 'top_rated' %}active{% endif %}">Top Rated</a>
+        <a href="{{ url_for('homepage', category="upcoming") }}" class="btn btn-outline-info {% if category == 'upcoming' %}active{% endif %}">Upcoming</a>
+    </div>
+
    {% for movie in movies %}
    <div class="col-lg-3 col-md-6 mb-4">
        <div class="card h-100">

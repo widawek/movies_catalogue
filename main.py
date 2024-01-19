@@ -12,9 +12,18 @@ def utility_processor():
 
 
 @app.route("/")
-def homepage():
-    movies = tmdb_client.get_movies(8)
-    return render_template("homepage.html", movies=movies)
+def default_homepage():
+    # Możesz wybrać domyślną kategorię lub obsłużyć to inaczej
+    default_category = 'popular'
+    movies = tmdb_client.get_movies(8, default_category)
+    return render_template("homepage.html", movies=movies,
+                           category=default_category)
+
+
+@app.route("/<category>")
+def homepage(category):
+    movies = tmdb_client.get_movies(8, category)
+    return render_template("homepage.html", movies=movies, category=category)
 
 
 @app.route("/movie/<movie_id>")
