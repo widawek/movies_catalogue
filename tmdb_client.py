@@ -1,6 +1,7 @@
 import requests
 import os
 import json
+import random
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 config_file = os.path.join(current_directory, 'instance/config.cfg')
@@ -41,5 +42,8 @@ def get_poster_url(poster_api_path, size='w342'):
 
 
 def get_movies(how_many):
-    data = get_popular_movies()
-    return data["results"][:how_many]
+    if how_many > 20:
+        how_many = 20
+    data = get_popular_movies()['results']
+    random.shuffle(data)
+    return data[:how_many]
