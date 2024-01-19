@@ -65,5 +65,14 @@ def get_single_movie_cast(movie_id):
     }
     response = requests.get(endpoint, headers=headers)
     cast = response.json()['cast']
-    cast = [actor for actor in cast if actor['profile_path'] is not None]
-    return cast[:8]
+    return cast
+
+
+def get_random_image(movie_id):
+    endpoint = f"https://api.themoviedb.org/3/movie/{movie_id}/images"
+    headers = {
+        "Authorization": f"Bearer {token}"
+    }
+    response = requests.get(endpoint, headers=headers)
+    images = response.json()['backdrops']
+    return random.choice(images)

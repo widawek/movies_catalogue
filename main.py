@@ -21,7 +21,9 @@ def homepage():
 def movie_details(movie_id):
     details = tmdb_client.get_single_movie(movie_id)
     cast = tmdb_client.get_single_movie_cast(movie_id)
-    return render_template("movie_details.html", movie=details, cast=cast)
+    image = tmdb_client.get_random_image(movie_id)
+    return render_template("movie_details.html", movie=details, cast=cast,
+                           image=image)
 
 
 if __name__ == "__main__":
