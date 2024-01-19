@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, url_for
 import tmdb_client
 
 app = Flask(__name__)
@@ -11,17 +11,16 @@ def utility_processor():
     return {"tmdb_image_url": tmdb_image_url}
 
 
-def get_movie_info(movie):
-    movie_info = {}
-    movie_info['title'] = movie['title']
-    movie_info['poster_path'] = movie['poster_path']
-    return movie_info
-
-
 @app.route("/")
 def homepage():
     movies = tmdb_client.get_movies(8)
     return render_template("homepage.html", movies=movies)
+
+
+@app.route("/movie/<movie_id>")
+def movie_details(movie_id):
+    details = tmdb_client.get_single_movie(movie_id)
+    return render_template("movie_details.html", movie=details)
 
 
 if __name__ == "__main__":

@@ -47,3 +47,12 @@ def get_movies(how_many):
     data = get_popular_movies()['results']
     random.shuffle(data)
     return data[:how_many]
+
+
+def get_single_movie(movie_id):
+    endpoint = f"https://api.themoviedb.org/3/movie/{movie_id}"
+    headers = {
+        "Authorization": f"Bearer {token}"
+    }
+    response = requests.get(endpoint, headers=headers)
+    return response.json()
